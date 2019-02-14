@@ -1,0 +1,68 @@
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class GameGrid {
+	
+	public void run() {
+		
+		Scanner input = new Scanner (System.in);
+		
+		int [][] gameGrid = new int [10][10];
+		SecureRandom oRand = new SecureRandom();
+		int	iWallChance = 10;
+		
+			
+		for (int x=0; x < gameGrid.length; x++) {
+			for (int y=0; y < gameGrid[0].length; y++) {
+				
+					if (oRand.nextInt(100) < iWallChance){
+						gameGrid[x][y] = 1;
+					}
+					else {
+						gameGrid[x][y] = 0;
+					}
+			}
+			gameGrid [0][0] = 0;
+		}
+		
+		int iUserRow = 0;
+		int iUserCol = 0;
+		
+		boolean check;
+		
+		while (check = true) {
+			
+			System.out.println("Please select which way to go: ");
+				String answer = input.next();
+				if (answer.equals("down")) {
+					iUserRow++;
+				}
+				else if (answer.equals("right")) {
+					iUserCol++;
+				}
+			if (gameGrid[iUserRow][iUserCol] == 1) {
+				System.out.println("You are failed");
+				break;
+			}
+			else if ( gameGrid[iUserRow][iUserCol] == 9) {
+				if (iUserRow == 9) {
+					System.out.println("You win");
+					break;
+				}
+			}
+		}
+		
+		for (int x=0; x < gameGrid.length; x++) {	
+			for (int y=0; y < gameGrid[0].length; y++) {
+				
+				if (gameGrid[x][y] == gameGrid[iUserRow][iUserCol]) {
+					System.out.print("X");
+				}
+			System.out.print(" " + gameGrid[x][y] );
+		}
+		System.out.println("");
+	}
+}
+}
+		
